@@ -1,0 +1,41 @@
+def my_bubble_sort(my_list):
+    list_len = len(my_list)
+    print("List len ", list_len)
+    for i in range(0, list_len):
+        for j in range (0, list_len-i-1):
+            if  my_list[j][1] > my_list[j+1][1] :
+                temp = my_list[j]
+                my_list[j] = my_list[j+1]
+                my_list[j+1] = temp
+if __name__ == '__main__':
+    my_list = []
+    for _ in range(int(input())):
+        name = input()
+        score = float(input())
+        t_list = []
+        t_list.append(name)
+        t_list.append(score)
+        my_list.append(t_list)
+    print("Before sort :", my_list)
+    my_bubble_sort(my_list)
+    print("after sort :", my_list)
+
+    least_list = []
+    #least_list.append(my_list[0][0])
+    least_marks = my_list[0][1]
+    i = 1
+
+    while least_marks == my_list[i][1]:
+        i = i + 1
+    else:
+        least_marks = my_list[i][1]
+
+    len = len(my_list)
+    while least_marks == my_list[i][1] and i < len : 
+        least_list.append(my_list[i][0])
+        i = i+1
+
+    least_list.sort()
+    for i in least_list:
+         print(i)
+

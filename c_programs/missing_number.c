@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Missing number in an array of size N - 1
+
+
+int main() {
+	//code
+	int test_cases = 0;
+	int sum = 0;
+	int elem = 0;
+	int *arr = NULL;
+	
+	scanf("%d", &test_cases);
+	while(test_cases){
+	    scanf("%d",&elem);
+	    sum = 0;
+	    arr = calloc(1, sizeof(int) *(elem-1));
+	    for(int i = 0; i < (elem-1);++i){
+	        scanf("%d", &arr[i]);
+	        sum += arr[i];
+	    }
+	    printf("%d\n", (elem * (elem+1))/2 - sum);
+	    free(arr);
+	    --test_cases;
+	}
+	return 0;
+}

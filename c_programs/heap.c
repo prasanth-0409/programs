@@ -1,0 +1,62 @@
+#include <stdio.h>
+// Heap
+
+void heapify(int * arr, int len, int pos)
+{
+    int lar = pos;
+    int left = 2 * pos + 1;
+    int right = 2 * pos + 2;
+
+    if ( (left < len) && (arr[left] > arr[pos]))
+	    lar = left;
+    if ( (right < len) && (arr[right] > arr[lar]))
+	    lar = right;
+
+    if( lar != pos ){
+	    int temp = arr[pos];
+	    arr[pos] = arr[lar];
+	    arr[lar] = temp;
+
+	    heapify(arr, len, lar);
+    }
+}
+void print_arr( int * arr, int len)
+{
+	printf("Length of array:%d\n", len);
+	for(int i=0; i < len;++i){
+		printf("%2d ", arr[i]);
+	}
+}
+void insert_heap(int * arr, int len, int val)
+{
+	int i = 0;
+	arr[len] = val;
+	for(i=len/2;i>=0; --i)
+		heapify(arr,len+1, i);
+}
+int main()
+{
+    int arr[] = {20,5,6, 17,7};
+    int arr2[] = {4,10,3,5,1};
+    int i = 0, len=0;
+
+    len = sizeof(arr)/sizeof(arr[0]);
+    print_arr(arr, len);
+    for ( i = (len - 1)/2; i >=0; --i){
+	printf("Heapify position:%d\n", i);
+        heapify(arr, len, i);
+    }
+    print_arr(arr, len);
+    printf("Inserting into heap\n");
+    insert_heap(arr, len, 10);
+    printf("new heap:");
+    print_arr(arr,len+1);
+    printf("Arr2:\n");
+    len = sizeof(arr2)/sizeof(arr2[0]);
+    print_arr(arr2, len);
+    for ( i = (len - 1)/2; i >=0; --i){
+	printf("Heapify position:%d\n", i);
+        heapify(arr2, len, i);
+    }
+    print_arr(arr2, len);
+}

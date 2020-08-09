@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+struct triangle
+{
+	int a;
+	int b;
+	int c;
+	double area;
+};
+
+typedef struct triangle triangle;
+struct my_triangle_{
+        double area;
+        triangle t;
+    };
+void sort(struct my_triangle_ *mt, int n ){
+    for(int i = 0; i < n-1;++i){
+        for(int j=0; j< n-i-1;++j){
+            if (mt[j].area > mt[j+1].area){
+                struct my_triangle_ temp = mt[j];
+                mt[j] = mt[j+1];
+                mt[j+1] = temp;
+            }
+        }
+    }
+}
+void sort_by_area(triangle* tr, int n) {
+	/**
+	* Sort an array a of the length n
+	*/
+    
+    struct my_triangle_ * mt = calloc(1, n * sizeof(struct my_triangle_));
+    for(int i =0; i < n; ++i){
+        mt[i].t.a = tr[i].a;
+        mt[i].t.b = tr[i].b;
+        mt[i].t.c = tr[i].c;
+        double p = (tr[i].a + tr[i].b + tr[i].c)/2.0;
+        mt[i].area = sqrt(p * (p - tr[i].a) * (p - tr[i].b) * (p - tr[i].c));
+    }
+#if 0
+    printf("Before sorting \n");
+    for ( int i = 0; i < n ++i){
+//	    printf("%d. a=%d b = %c c =%d area:%f
+    }
+#endif
+    sort(mt, n);
+    for(int i = 0; i < n; ++i){
+        tr[i].a = mt[i].t.a;
+        tr[i].b = mt[i].t.b;
+        tr[i].c = mt[i].t.c;
+	tr[i].area = mt[i].area;
+    }
+    return;
+}
+
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	triangle *tr = malloc(n * sizeof(triangle));
+	for (int i = 0; i < n; i++) {
+		scanf("%d%d%d", &tr[i].a, &tr[i].b, &tr[i].c);
+	}
+	sort_by_area(tr, n);
+	for (int i = 0; i < n; i++) {
+		printf("%f %d %d %d\n",tr[i].area, tr[i].a, tr[i].b, tr[i].c);
+	}
+	return 0;
+}

@@ -1,0 +1,14 @@
+shop = ['onions','tomatoes','carrot']
+
+#print(shop)
+
+for i in shop:
+    print(i,end=' ')
+
+shop.insert(0,'beans')
+
+for i in shop:
+    print(i,end=' ')
+
+shop.sort()
+print(shop)
